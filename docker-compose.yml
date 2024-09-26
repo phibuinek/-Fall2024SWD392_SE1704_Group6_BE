@@ -1,0 +1,20 @@
+version: '3.8'
+
+services:
+  app:
+    build:
+      context: .
+      dockerfile: dockerfile
+    ports:
+      - "3000:3000"  # Chuyển tiếp port 3000 của ứng dụng
+    environment:
+      DB_URI: mongodb://mongo:27017/library-nest-api  # Địa chỉ kết nối MongoDB
+    depends_on:
+      - mongo  # Đảm bảo mongo chạy trước
+    image: paw-fund-nestjs:latest
+    container_name: PawFund
+  mongo:
+    image: mongo:latest  # Sử dụng hình ảnh chính thức của MongoDB
+    container_name: mongo_container  # Tên container MongoDB
+    ports:
+      - "27017:27017"  # Chuyển tiếp port 27017 của MongoDB
