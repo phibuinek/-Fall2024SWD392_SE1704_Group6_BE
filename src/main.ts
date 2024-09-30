@@ -17,9 +17,6 @@ async function bootstrap() {
     .build();
   const document = SwaggerModule.createDocument(app, config);
   SwaggerModule.setup('swagger', app, document);
-
-  // Xuất tài liệu Swagger ra tệp JSON
-  writeFileSync('./swagger.json', JSON.stringify(document));
   await app.listen(3000);
 }
 bootstrap();

@@ -15,27 +15,27 @@ import { UpdatePetDto } from "./dto/update-pet.dto";
 export class PetController {
   constructor(private readonly petService: PetService) {}
 
-  @Post()
+  @Post("create")
   create(@Body() createPetDto: CreatePetDto) {
     return this.petService.create(createPetDto);
   }
 
-  @Get()
+  @Get("findAll")
   findAll() {
     return this.petService.findAll();
   }
 
-  @Get(":id")
+  @Get("findOne/:id")
   findOne(@Param("id") id: string) {
     return this.petService.findOne(id);
   }
 
-  @Patch(":id")
+  @Patch("update/:id")
   update(@Param("id") id: string, @Body() updatePetDto: UpdatePetDto) {
     return this.petService.update(id, updatePetDto);
   }
 
-  @Delete(":id")
+  @Delete("delete/:id")
   remove(@Param("id") id: string) {
     return this.petService.remove(id);
   }
