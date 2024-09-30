@@ -27,10 +27,6 @@ export enum PetStatus {
 }
 
 export class CreatePetDto {
-  @ApiProperty({
-    description: 'ID của thú cưng',
-    example: 1,
-  })
   @IsInt()
   id: number;
 
@@ -147,11 +143,8 @@ export class CreatePetDto {
   @IsOptional()
   note?: string;
 
-  @ApiProperty({
-    description: 'Ngày thú cưng được cứu hộ',
-    example: '2023-08-25T14:48:00.000Z',
-  })
   @IsDate()
+  @IsOptional()
   rescueDate: Date;
 
   @ApiProperty({

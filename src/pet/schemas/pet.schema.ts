@@ -48,7 +48,7 @@ export class Pet {
   @Prop()
   note?: string;
 
-  @Prop({ required: true })
+  @Prop({ required: false })
   rescueDate: Date;
 
   @Prop({ required: true })

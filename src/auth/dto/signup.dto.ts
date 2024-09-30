@@ -36,7 +36,7 @@ export class SignUpDto {
 
   @ApiProperty({
     description: 'Danh sách vai trò của người dùng, nếu có',
-    example: ['user'],
+    example: ['customers'],
     required: false, 
     type: [String],
   })
