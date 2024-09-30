@@ -27,7 +27,11 @@ export enum PetStatus {
 }
 
 export class CreatePetDto {
-  @IsInt()
+  @ApiProperty({
+    description: 'ID của Pet',
+    example: 1
+  })
+  @IsInt() 
   id: number;
 
   @ApiProperty({
