@@ -138,6 +138,7 @@ export class CreatePetDto {
     description: 'Thú cưng đã được nhận nuôi chưa',
     example: false,
   })
+  @IsOptional()
   @IsBoolean()
   isAdopted: boolean;
 

@@ -42,7 +42,7 @@ export class Pet {
   @Prop({ type: String, enum: DeliveryStatus, default: DeliveryStatus.PENDING })
   deliveryStatus: DeliveryStatus;
 
-  @Prop({ required: true })
+  @Prop({ required: false, default: false })
   isAdopted: boolean;
 
   @Prop()
