@@ -6,6 +6,7 @@ import * as bcrypt from "bcryptjs";
 import { JwtService } from "@nestjs/jwt";
 import { SignUpDto } from "./dto/signup.dto";
 import { LoginDto } from "./dto/login.dto";
+import { Role } from "./enums/role.enum";
 
 @Injectable()
 export class AuthService {
@@ -13,7 +14,32 @@ export class AuthService {
     @InjectModel(User.name)
     private userModel: Model<User>,
     private jwtService: JwtService,
-  ) {}
+  ) { }
+  //Tạo data mẫu
+  async onModuleInit() {
+    const users = await this.userModel.find().exec();
+
+    if (users.length === 0) {
+      const defaultPassword = await bcrypt.hash("123456", 10);
+      await this.userModel.create([
+        {
+          name: 'ShelterStaff',
+          email: 'ShelterStaff@gmail.com',
+          password: defaultPassword,
+          role: [Role.SHELTER_STAFF]
+        },
+        {
+          name: 'Admin',
+          email: 'Admin@gmail.com',
+          password: defaultPassword,
+          role: [Role.ADMIN]
+        },
+      ]);
+      console.log('Sample users created!');
+    } else {
+      console.log('Sample data already exists.');
+    }
+  }
 
   async signUp(signUpDto: SignUpDto): Promise<{ token: string }> {
     const { name, email, password, role } = signUpDto;
