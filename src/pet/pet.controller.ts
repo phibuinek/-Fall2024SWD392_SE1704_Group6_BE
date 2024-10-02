@@ -11,7 +11,9 @@ import {
 import { PetService } from "./pet.service";
 import { CreatePetDto } from "./dto/create-pet.dto";
 import { UpdatePetDto } from "./dto/update-pet.dto";
+import { ApiTags } from "@nestjs/swagger";
 
+@ApiTags("Pet")
 @Controller("pet")
 export class PetController {
   constructor(private readonly petService: PetService) {}
@@ -24,12 +26,12 @@ export class PetController {
     return this.petService.create(createPetDto);
   }
 
-  @Get("findAll")
+  @Get("find-all")
   findAll() {
     return this.petService.findAll();
   }
 
-  @Get("findOne/:id")
+  @Get("find-by-id/:id")
   findOne(@Param("id") id: string) {
     return this.petService.findOne(id);
   }
@@ -41,6 +43,6 @@ export class PetController {
 
   @Delete("delete/:id")
   remove(@Param("id") id: string) {
-    return this.petService.remove(id);
+    return this.petService.remove(id);  
   }
 }

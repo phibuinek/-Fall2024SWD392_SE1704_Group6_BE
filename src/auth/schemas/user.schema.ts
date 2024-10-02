@@ -17,7 +17,7 @@ export class User extends Document {
 
   @Prop({
     type: [{ type: String, enum: Role }],
-    default: [Role.Customers],
+    default: [Role.CUSTOMER],
   })
   role: Role;
 }

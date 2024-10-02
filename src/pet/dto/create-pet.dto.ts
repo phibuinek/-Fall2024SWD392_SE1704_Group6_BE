@@ -13,21 +13,6 @@ import {
   Matches,
 } from "class-validator";
 
-// Định nghĩa Enum cho DeliveryStatus
-export enum DeliveryStatus {
-  PENDING = "PENDING",
-  COMPLETED = "COMPLETED",
-  CANCELED = "CANCELED",
-}
-
-// Định nghĩa Enum cho PetStatus
-export enum PetStatus {
-  AVAILABLE = "AVAILABLE",
-  ADOPTED = "ADOPTED",
-  LOST = "LOST",
-  PENDING = "PENDING",
-}
-
 export class CreatePetDto {
   @ApiProperty({
     description: 'ID của Pet',

@@ -5,6 +5,9 @@ import { AppController } from "./app.controller";
 import { AppService } from "./app.service";
 import { AuthModule } from "./auth/auth.module";
 import { PetModule } from './pet/pet.module';
+import { ShelterModule } from "./shelter/shelter.module";
+import { HealthCheckModule } from "./health-check/health-check.module";
+import { AdoptionRequestModule } from "./adoption-request/adoption-request.module";
 
 @Module({
   imports: [
@@ -15,6 +18,9 @@ import { PetModule } from './pet/pet.module';
     MongooseModule.forRoot(process.env.DB_URI),
     AuthModule,
     PetModule,
+    ShelterModule,
+    HealthCheckModule,
+    AdoptionRequestModule,
   ],
   controllers: [AppController],
   providers: [AppService],
