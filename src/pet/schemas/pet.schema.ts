@@ -60,7 +60,7 @@ export class Pet {
   @Prop({ required: true })
   locationFound: string;
 
-  @Prop({ type: String, enum: PetStatus, default: PetStatus.AVAILABLE })
+  @Prop({ type: String, enum: PetStatus, default: PetStatus.PENDING })
   petStatus: PetStatus;
 }
 
