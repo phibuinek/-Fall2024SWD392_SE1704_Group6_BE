@@ -6,6 +6,7 @@ import {
   Patch,
   Param,
   Delete,
+  Req,
 } from "@nestjs/common";
 import { PetService } from "./pet.service";
 import { CreatePetDto } from "./dto/create-pet.dto";
@@ -16,7 +17,10 @@ export class PetController {
   constructor(private readonly petService: PetService) {}
 
   @Post("create")
-  create(@Body() createPetDto: CreatePetDto) {
+  create(@Body() createPetDto: CreatePetDto, @Req() req: any) {
+    const userId = req.user.id;
+
+    createPetDto.rescueBy = userId;
     return this.petService.create(createPetDto);
   }
 
