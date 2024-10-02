@@ -10,9 +10,8 @@ import {
   Length,
   Max,
   Min,
+  Matches,
 } from "class-validator";
-import { DeliveryStatus } from "../enums/delivery-status.enum";
-import { PetStatus } from "../enums/pet-status.enum";
 
 export class CreatePetDto {
   @ApiProperty({
@@ -34,7 +33,8 @@ export class CreatePetDto {
     example: 'PET12345',
   })
   @IsString()
-  @Length(1, 20)
+  @Length(4, 20)
+  @Matches(/^PET\d+$/, { message: 'petCode must start with "PET" followed by numbers' })
   petCode: string;
 
   @ApiProperty({
@@ -123,6 +123,7 @@ export class CreatePetDto {
     description: 'Thú cưng đã được nhận nuôi chưa',
     example: false,
   })
+  @IsOptional()
   @IsBoolean()
   isAdopted: boolean;
 
@@ -165,6 +166,7 @@ export class CreatePetDto {
     example: 'AVAILABLE',
     enum: PetStatus,
   })
+  @IsOptional()
   @IsEnum(PetStatus)
   petStatus: PetStatus;
 }
