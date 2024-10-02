@@ -12,6 +12,8 @@ import {
   Min,
   Matches,
 } from "class-validator";
+import { DeliveryStatus } from "../enums/delivery-status.enum";
+import { PetStatus } from "../enums/pet-status.enum";
 
 export class CreatePetDto {
   @ApiProperty({
