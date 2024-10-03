@@ -5,7 +5,6 @@
   import { Type } from 'class-transformer';
 
   export class CreateHealthCheckDto {
-    @ApiProperty({ example: '60e6b8e2f1a2b93f68f87c6d' })
     @IsString()
     @IsOptional()
     petId: string;
