@@ -38,7 +38,6 @@ export class SignUpDto {
   @IsEnum(Role, { each: true })
   role?: Role;
 
-  @ApiProperty({ example: 'ACTIVE', required: false })
   @IsOptional()
   @IsString()
   status?: string;
