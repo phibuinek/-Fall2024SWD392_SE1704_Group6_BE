@@ -1,11 +1,11 @@
 import { Prop, Schema, SchemaFactory } from "@nestjs/mongoose";
 import { Pet } from "src/pet/schemas/pet.schema";
-import { HealthStatus } from "../enums/health-status.enum";
+import { HealthStatus } from "../../enums/health-status.enum";
 import mongoose, { Document } from "mongoose";
 import { User } from "src/auth/schemas/user.schema";
-import { CheckingType } from "../enums/checking-type.enum";
+import { CheckingType } from "../../enums/checking-type.enum";
 
-
+export type HealthCheckDocument = HealthCheck & Document;
 @Schema({
     timestamps: true
 })
@@ -23,7 +23,7 @@ export class HealthCheck extends Document{
     healthStatusDescription: String;
 
     @Prop()
-    ote: string;
+    note: string;
 
     @Prop()
     weight: number;
@@ -31,8 +31,8 @@ export class HealthCheck extends Document{
     @Prop()
     temperature: number;
 
-    @Prop()
-    checkingDate: Date;
+    // @Prop()
+    // checkingDate: Date;
 
     @Prop({type: mongoose.Schema.Types.ObjectId, ref: 'User'})
     checkingBy: User;

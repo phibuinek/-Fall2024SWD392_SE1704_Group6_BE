@@ -25,6 +25,6 @@ export class JwtStrategy extends PassportStrategy(Strategy) {
     if (!user) {
       throw new UnauthorizedException("Login first to access this endpoint.");
     }
-    return user;
+    return user.toObject;
   }
 }
