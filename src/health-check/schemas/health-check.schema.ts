@@ -31,8 +31,8 @@ export class HealthCheck extends Document{
     @Prop()
     temperature: number;
 
-    // @Prop()
-    // checkingDate: Date;
+    @Prop()
+    checkingDate: Date;
 
     @Prop({type: mongoose.Schema.Types.ObjectId, ref: 'User'})
     checkingBy: User;

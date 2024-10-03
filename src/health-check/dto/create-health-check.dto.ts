@@ -1,53 +1,54 @@
-import { IsBoolean, IsDate, IsEnum, IsMongoId, IsNotEmpty, IsNumber, IsOptional, IsString } from "class-validator";
-import { ApiProperty } from "@nestjs/swagger";  // Import decorator ApiProperty
-import { HealthStatus } from "../enums/health-status.enum";
-import { CheckingType } from "../enums/checking-type.enum";
+  import { IsString, IsNumber, IsOptional, IsEnum, IsNotEmpty, IsDate } from 'class-validator';
+  import { ApiProperty } from '@nestjs/swagger';
+  import { HealthStatus } from '../enums/health-status.enum';
+  import { CheckingType } from '../enums/checking-type.enum';
+  import { Type } from 'class-transformer';
 
-export class CreateHealthCheckDto {
-  
-  @IsString()
-  @IsOptional()
-  petId: string;
+  export class CreateHealthCheckDto {
+    @ApiProperty({ example: '60e6b8e2f1a2b93f68f87c6d' })
+    @IsString()
+    @IsOptional()
+    petId: string;
 
-  @ApiProperty({ enum: HealthStatus, example: HealthStatus.HEALTHY })
-  @IsEnum(HealthStatus)
-  @IsNotEmpty()
-  healthStatus: HealthStatus;
+    @ApiProperty({ example: HealthStatus.HEALTHY })
+    @IsEnum(HealthStatus)
+    healthStatus: HealthStatus;
 
-  @ApiProperty({ example: "Pet is in good condition" })
-  @IsString()
-  healthStatusDescription: string;
-  
-  @ApiProperty({ required: false })
-  @IsString()
-  @IsOptional()
-  note: string;
+    @ApiProperty({ example: 'The pet is in good health.' })
+    @IsOptional()
+    @IsString()
+    healthStatusDescription?: string;
 
-  @ApiProperty({ example: 5.2 })
-  @IsNumber()
-  @IsNotEmpty()
-  weight: number;
+    @ApiProperty({ example: 'No notable issues.' })
+    @IsOptional()
+    @IsString()
+    note?: string;
 
-  @ApiProperty({ example: 37.5 })
-  @IsNumber()
-  @IsNotEmpty()
-  temperature: number;
+    @ApiProperty({ example: 15.5 })
+    @IsOptional()
+    @IsNumber()
+    weight?: number;
 
-//   @ApiProperty({ example: "2024-10-01T00:00:00Z" })
-//   @IsDate()
-//   @IsOptional()
-//   checkingDate: Date;
+    @ApiProperty({ example: 38.5 })
+    @IsOptional()
+    @IsNumber()
+    temperature?: number;
 
-  @IsMongoId() 
-  @IsNotEmpty()
-  @IsOptional()
-  checkingBy: string;
+    @IsOptional()
+    @IsDate()
+    @Type(() => Date) //
+    @ApiProperty({ example: '2024-10-03T12:00:00Z' }) 
+    checkingDate: Date;
+    
+    @ApiProperty({ example: '60e6b8e2f1a2b93f68f87c6d' })
+    @IsString()
+    checkingBy: string;
 
-  @IsEnum(CheckingType)
-  @IsOptional()
-  checkingType: CheckingType;
+    @ApiProperty({ example: CheckingType.INITIAL })
+    @IsEnum(CheckingType)
+    checkingType?: CheckingType;
 
-  @ApiProperty({ example: false })
-  @IsBoolean()
-  isOld: boolean;
-}
+    @ApiProperty({ example: false })
+    @IsOptional()
+    isOld?: boolean;
+  }

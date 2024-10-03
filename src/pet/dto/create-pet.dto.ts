@@ -1,155 +1,79 @@
-import { ApiProperty } from "@nestjs/swagger";
-import {
-  IsString,
-  IsInt,
-  IsBoolean,
-  IsEnum,
-  IsDate,
-  IsNumber,
-  IsOptional,
-  Length,
-  Max,
-  Min,
-  Matches,
-} from "class-validator";
-import { DeliveryStatus } from "../enums/delivery-status.enum";
-import { PetStatus } from "../enums/pet-status.enum";
+import { IsString, IsNumber, IsOptional, IsEnum } from 'class-validator';
+import { ApiProperty } from '@nestjs/swagger';
+import { DeliveryStatus } from '../enums/delivery-status.enum';
+import { PetStatus } from '../enums/pet-status.enum';
 
 export class CreatePetDto {
-  @ApiProperty({
-    example: 1
-  })
-  @IsInt() 
-  id: number;
+  @ApiProperty({ example: 1 })
+  @IsOptional()
+  @IsNumber()
+  shelterId?: number;
 
-  @ApiProperty({
-    example: 101,
-  })
-  @IsInt()
-  shelterId: number;
-
-  @ApiProperty({
-    example: 'PET12345',
-  })
+  @ApiProperty({ example: 'PET123' })
   @IsString()
-  @Length(4, 20)
-  @Matches(/^PET\d+$/, { message: 'petCode must start with "PET" followed by numbers' })
   petCode: string;
 
-  @ApiProperty({
-    example: 'Fluffy',
-  })
+  @ApiProperty({ example: 'https://example.com/image.jpg' })
   @IsString()
-  @Length(1, 100)
+  image: string;
+
+  @ApiProperty({ example: 'Milo' })
+  @IsString()
   name: string;
 
-  @ApiProperty({
-    example: 'A friendly dog',
-    required: false,
-  })
-  @IsString()
+  @ApiProperty({ example: 'A friendly dog.' })
   @IsOptional()
+  @IsString()
   description?: string;
 
-  @ApiProperty({
-    example: 'https://example.com/image.jpg',
-    required: false,
-  })
-  @IsString()
+  @ApiProperty({ example: 'Brown' })
   @IsOptional()
-  image?: string;
-
-  @ApiProperty({
-    example: 'Brown',
-    required: false,
-  })
   @IsString()
-  @IsOptional()
   color?: string;
 
-  @ApiProperty({
-    example: 'Golden Retriever',
-  })
+  @ApiProperty({ example: 'Labrador' })
   @IsString()
   breed: string;
 
-  @ApiProperty({
-    example: 3,
-    minimum: 0,
-    maximum: 30,
-  })
-  @IsInt()
-  @Min(0)
-  @Max(30)
+  @ApiProperty({ example: 5 })
+  @IsNumber()
   age: number;
 
-  @ApiProperty({
-    example: 1,
-  })
-  @IsInt()
-  species: number;
+  @ApiProperty({ example: true })
+  @IsOptional()
+  isVacinted?: boolean;
 
-  @ApiProperty({
-    example: true,
-  })
-  @IsBoolean()
-  isVacinted: boolean;
+  @ApiProperty({ example: false })
+  @IsOptional()
+  isVerified?: boolean;
 
-  @ApiProperty({
-    example: true,
-  })
-  @IsBoolean()
-  isVerified: boolean;
-
-  @ApiProperty({
-    example: 'PENDING',
-    enum: DeliveryStatus,
-  })
+  @ApiProperty({ example: DeliveryStatus.PENDING })
+  @IsOptional()
   @IsEnum(DeliveryStatus)
-  deliveryStatus: DeliveryStatus;
+  deliveryStatus?: DeliveryStatus = DeliveryStatus.PENDING;
 
-  @ApiProperty({
-    example: false,
-  })
+  @ApiProperty({ example: false })
   @IsOptional()
-  @IsBoolean()
-  isAdopted: boolean;
+  isAdopted?: boolean = false;
 
-  @ApiProperty({
-    example: 'Rescued from a busy street',
-    required: false,
-  })
+  @ApiProperty({ example: 'Rescue from the street.' })
+  @IsOptional()
   @IsString()
-  @IsOptional()
   note?: string;
 
-  @IsDate()
-  @IsOptional()
-  rescueDate: Date;
+  @ApiProperty({ example: '60e6b8e2f1a2b93f68f87c6d' }) // Ví dụ về ObjectId của User
+  @IsString()
+  rescueBy: string;
 
-  @ApiProperty({
-    example: 205,
-  })
-  @IsInt()
-  rescueBy: number;
-
-  @ApiProperty({
-    example: 150.5,
-  })
+  @ApiProperty({ example: 100 })
   @IsNumber()
   rescueFee: number;
 
-  @ApiProperty({
-    example: 'Central Park, New York',
-  })
+  @ApiProperty({ example: 'Park' })
   @IsString()
   locationFound: string;
 
-  @ApiProperty({
-    example: 'AVAILABLE',
-    enum: PetStatus,
-  })
-  @IsOptional()
+  @ApiProperty({ example: PetStatus.AVAILABLE })
   @IsEnum(PetStatus)
-  petStatus: PetStatus;
+  petStatus?: PetStatus = PetStatus.AVAILABLE;
 }

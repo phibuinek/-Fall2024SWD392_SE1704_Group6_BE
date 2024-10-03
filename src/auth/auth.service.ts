@@ -27,14 +27,14 @@ export class AuthService {
           email: 'ShelterStaff@gmail.com',
           password: defaultPassword,
           avatar: 'default-avatar.png',
-          role: [Role.SHELTER_STAFF]
+          role: Role.SHELTER_STAFF
         },
         {
           name: 'Admin',
           email: 'Admin@gmail.com',
           password: defaultPassword,
           avatar: 'default-avatar.png',
-          role: [Role.ADMIN]
+          role: Role.ADMIN
         },
       ]);
       console.log('Sample users created!');

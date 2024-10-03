@@ -32,9 +32,6 @@ export class Pet {
   @Prop({ required: true, min: 0, max: 30 })
   age: number;
 
-  @Prop({ required: true })
-  species: number;
-
   @Prop()
   isVacinted: boolean;
 
@@ -51,11 +48,11 @@ export class Pet {
   @Prop()
   note?: string;
 
-  @Prop({ required: false })
-  rescueDate: Date;
+  // @Prop({ required: false })
+  // rescueDate: Date;
 
-  @Prop({type: [{type: mongoose.Schema.Types.ObjectId, ref: 'User'}]})
-  rescueBy: User;
+  @Prop()
+  rescueBy: String;
 
   @Prop({ required: true })
   rescueFee: number;
