@@ -5,7 +5,7 @@ import mongoose, { Document } from "mongoose";
 import { User } from "src/auth/schemas/user.schema";
 import { CheckingType } from "../enums/checking-type.enum";
 
-
+export type HealthCheckDocument = HealthCheck & Document;
 @Schema({
     timestamps: true
 })
@@ -23,7 +23,7 @@ export class HealthCheck extends Document{
     healthStatusDescription: String;
 
     @Prop()
-    ote: string;
+    note: string;
 
     @Prop()
     weight: number;

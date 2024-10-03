@@ -27,10 +27,10 @@ export class User {
   @Prop()
   phone: string;
 
-  @Prop({ required: true })
-  roleId: number;
+  // @Prop({ required: true })
+  // roleId: number;
 
-  @Prop({ enum: Role, default: Role.Customers })
+  @Prop({ enum: Role, default: Role.CUSTOMER })
   @Prop({
     type: [{ type: String, enum: Role }],
     default: [Role.CUSTOMER],

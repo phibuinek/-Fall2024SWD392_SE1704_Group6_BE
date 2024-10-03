@@ -13,6 +13,7 @@ import {
   AutoIncrementID,
   AutoIncrementIDOptions,
 } from "@typegoose/auto-increment";
+import { User, UserSchema } from "./auth/schemas/user.schema";
 
 @Module({
   imports: [

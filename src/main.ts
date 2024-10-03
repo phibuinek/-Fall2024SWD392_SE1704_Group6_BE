@@ -13,11 +13,11 @@ async function bootstrap() {
     credentials: true,
   })
   app.useGlobalPipes(new ValidationPipe());
-
   const config = new DocumentBuilder()
     .setTitle('PawFund')
     .setDescription('PawFund API by NestJS')
     .setVersion('1.0')
+    .addBearerAuth()
     .build();
   const document = SwaggerModule.createDocument(app, config);
   SwaggerModule.setup('swagger', app, document);

@@ -5,7 +5,7 @@ import { HealthCheckController } from "./health-check.controller";
 import { HealthCheckService } from "./health-check.service";
 
 @Module({
-    imports: [MongooseModule.forFeature([{name: HealthCheck.name, schema: HealthCheckSchema}])],
+    imports: [MongooseModule.forFeature([{name: HealthCheck.name, schema: HealthCheckSchema}]), HealthCheckModule],
     controllers: [HealthCheckController],
     providers: [HealthCheckService],
 })
