@@ -2,6 +2,7 @@ import { Prop, Schema, SchemaFactory } from "@nestjs/mongoose";
 import mongoose, { Document } from "mongoose";
 import { Role } from "../enums/role.enum"; // Sử dụng enum Role từ phần auth của bạn
 import * as AutoIncrementFactory from "mongoose-sequence";
+import { AccountStatus } from "../enums/account-status.enum";
 
 export type UserDocument = User & Document;
 
@@ -37,7 +38,7 @@ export class User {
   })
   role: Role;
 
-  @Prop({ enum: ["ACTIVE", "INACTIVE", "BANNED"], default: "ACTIVE" })
+  @Prop({ type: String, enum: AccountStatus, default: "ACTIVE" })
   status: string;
 }
 
