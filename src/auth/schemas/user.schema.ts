@@ -31,6 +31,10 @@ export class User {
   roleId: number;
 
   @Prop({ enum: Role, default: Role.Customers })
+  @Prop({
+    type: [{ type: String, enum: Role }],
+    default: [Role.CUSTOMER],
+  })
   role: Role;
 
   @Prop({ default: Date.now })

@@ -4,8 +4,11 @@ import { MongooseModule } from "@nestjs/mongoose";
 import { AppController } from "./app.controller";
 import { AppService } from "./app.service";
 import { AuthModule } from "./auth/auth.module";
-import { PetModule } from "./pet/pet.module";
 import { UserModule } from "./user/user.module";
+import { PetModule } from './pet/pet.module';
+import { ShelterModule } from "./shelter/shelter.module";
+import { HealthCheckModule } from "./health-check/health-check.module";
+import { AdoptionRequestModule } from "./adoption-request/adoption-request.module";
 
 @Module({
   imports: [
@@ -17,6 +20,9 @@ import { UserModule } from "./user/user.module";
     AuthModule,
     PetModule,
     UserModule,
+    ShelterModule,
+    HealthCheckModule,
+    AdoptionRequestModule,
   ],
   controllers: [AppController],
   providers: [AppService],

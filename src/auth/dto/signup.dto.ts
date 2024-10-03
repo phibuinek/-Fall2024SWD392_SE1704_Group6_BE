@@ -38,7 +38,7 @@ export class SignUpDto {
     description: 'Danh sách vai trò của người dùng, nếu có',
     example: ['customers'],
     required: false, 
-    type: [String],
+    type: [String], 
   })
   @IsOptional()
   readonly role: string[];

@@ -1,15 +1,17 @@
 import { Prop, Schema, SchemaFactory } from "@nestjs/mongoose";
-import { Document } from "mongoose";
-import { DeliveryStatus, PetStatus } from "../dto/create-pet.dto";
+import mongoose, { Document } from "mongoose";
+import { User } from "src/auth/schemas/user.schema";
+import { DeliveryStatus } from "../enums/delivery-status.enum";
+import { PetStatus } from "../enums/pet-status.enum";
 
 export type PetDocument = Pet & Document;
 
 @Schema()
 export class Pet {
-  @Prop({ required: true })
+  @Prop()
   shelterId: number;
 
-  @Prop({ required: true, unique: true })
+  @Prop({ unique: true })
   petCode: string;
 
   @Prop({ required: true })
@@ -33,14 +35,15 @@ export class Pet {
   @Prop({ required: true })
   species: number;
 
-  @Prop({ required: true })
+  @Prop()
   isVacinted: boolean;
 
-  @Prop({ required: true })
+  @Prop()
   isVerified: boolean;
 
   @Prop({ type: String, enum: DeliveryStatus, default: DeliveryStatus.PENDING })
   deliveryStatus: DeliveryStatus;
+
 
   @Prop({ required: false, default: false })
   isAdopted: boolean;
@@ -51,8 +54,8 @@ export class Pet {
   @Prop({ required: false })
   rescueDate: Date;
 
-  @Prop({ required: true })
-  rescueBy: number;
+  @Prop({type: [{type: mongoose.Schema.Types.ObjectId, ref: 'User'}]})
+  rescueBy: User;
 
   @Prop({ required: true })
   rescueFee: number;
@@ -60,7 +63,7 @@ export class Pet {
   @Prop({ required: true })
   locationFound: string;
 
-  @Prop({ type: String, enum: PetStatus, default: PetStatus.PENDING })
+  @Prop({ type: String, enum: PetStatus, default: PetStatus.AVAILABLE })
   petStatus: PetStatus;
 }
 
