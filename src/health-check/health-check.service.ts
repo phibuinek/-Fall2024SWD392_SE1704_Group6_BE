@@ -2,7 +2,7 @@ import { Injectable } from '@nestjs/common';
 import { InjectModel } from '@nestjs/mongoose';
 import { HealthCheck, HealthCheckDocument } from './schemas/health-check.schema';
 import { Model } from 'mongoose';
-import { CreateHealthCheckDto } from '../dto/create-health-check.dto';
+import { CreateHealthCheckDto } from './dto/create-health-check.dto';
 
 @Injectable()
 export class HealthCheckService {
@@ -11,7 +11,7 @@ export class HealthCheckService {
   ) { }
 
   async createHealthCheck(createHealthCheckDto: CreateHealthCheckDto){
-    const newHealthCheck = new this.healthCheckModel(createHealthCheckDto) 
+    const newHealthCheck = new this.healthCheckModel(createHealthCheckDto){};
     return newHealthCheck.save(); 
   }
 

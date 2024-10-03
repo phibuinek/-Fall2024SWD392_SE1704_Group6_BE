@@ -7,7 +7,7 @@ import { AuthModule } from "./auth/auth.module";
 import { UserModule } from "./user/user.module";
 import { PetModule } from './pet/pet.module';
 import { ShelterModule } from "./shelter/shelter.module";
-import { HealthCheckModule } from "./health-check/health-check/health-check.module";
+import { HealthCheckModule } from "./health-check/health-check.module";
 import { AdoptionRequestModule } from "./adoption-request/adoption-request.module";
 
 @Module({

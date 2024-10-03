@@ -26,12 +26,14 @@ export class AuthService {
           name: 'ShelterStaff',
           email: 'ShelterStaff@gmail.com',
           password: defaultPassword,
+          avatar: 'default-avatar.png',
           role: [Role.SHELTER_STAFF]
         },
         {
           name: 'Admin',
           email: 'Admin@gmail.com',
           password: defaultPassword,
+          avatar: 'default-avatar.png',
           role: [Role.ADMIN]
         },
       ]);
@@ -66,7 +68,7 @@ export class AuthService {
     if (!isPasswordMatched) {
       throw new UnauthorizedException("Invalid email or password");
     }
-    const token = this.jwtService.sign({ id: user._id, roles: user.role });
+    const token = this.jwtService.sign({ id: user._id});
     return { token };
   }
 }
