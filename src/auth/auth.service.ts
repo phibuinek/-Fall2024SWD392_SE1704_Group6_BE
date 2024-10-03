@@ -16,35 +16,35 @@ export class AuthService {
     private jwtService: JwtService,
   ) { }
   //Tạo data mẫu
-  async onModuleInit() {
-    const users = await this.userModel.find().exec();
+  // async onModuleInit() {
+  //   const users = await this.userModel.find().exec();
 
-    if (users.length === 0) {
-      const defaultPassword = await bcrypt.hash("123456", 10);
-      await this.userModel.create([
-        {
-          name: 'ShelterStaff',
-          email: 'ShelterStaff@gmail.com',
-          password: defaultPassword,
-          avatar: 'default-avatar.png',
-          role: Role.SHELTER_STAFF
-        },
-        {
-          name: 'Admin',
-          email: 'Admin@gmail.com',
-          password: defaultPassword,
-          avatar: 'default-avatar.png',
-          role: Role.ADMIN
-        },
-      ]);
-      console.log('Sample users created!');
-    } else {
-      console.log('Sample data already exists.');
-    }
-  }
+  //   if (users.length === 0) {
+  //     const defaultPassword = await bcrypt.hash("123456", 10);
+  //     await this.userModel.create([
+  //       {
+  //         name: 'ShelterStaff',
+  //         email: 'ShelterStaff@gmail.com',
+  //         password: defaultPassword,
+  //         avatar: 'default-avatar.png',
+  //         role: Role.SHELTER_STAFF
+  //       },
+  //       {
+  //         name: 'Admin',
+  //         email: 'Admin@gmail.com',
+  //         password: defaultPassword,
+  //         avatar: 'default-avatar.png',
+  //         role: Role.ADMIN
+  //       },
+  //     ]);
+  //     console.log('Sample users created!');
+  //   } else {
+  //     console.log('Sample data already exists.');
+  //   }
+  // }
 
   async signUp(signUpDto: SignUpDto): Promise<{ token: string }> {
-    const { name, email, password, role } = signUpDto;
+    const { name, email, password, avatar, address, phone, role, status } = signUpDto;
 
     const hashedPassword = await bcrypt.hash(password, 10);
 
@@ -52,7 +52,11 @@ export class AuthService {
       name,
       email,
       password: hashedPassword,
+      avatar,
+      address,
+      phone,
       role,
+      status,
     });
     const token = this.jwtService.sign({ id: user._id });
     return { token };

@@ -6,7 +6,7 @@ services:
       context: .
       dockerfile: Dockerfile
     ports:
-      - "3000:3000"
+      - "8000:8000"
     environment:
       DB_URI: mongodb://mongo:27017/library-nest-api
     depends_on:

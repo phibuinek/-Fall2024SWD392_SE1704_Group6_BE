@@ -9,7 +9,7 @@ export type UserDocument = User & Document;
 export class User {
   @Prop({ unique: true })
   id: number;
-  @Prop({ required: true })
+  @Prop()
   avatar: string;
 
   @Prop({ required: true, unique: true })
@@ -36,15 +36,6 @@ export class User {
     default: [Role.CUSTOMER],
   })
   role: Role;
-
-  @Prop({ default: Date.now })
-  createdAt: Date;
-
-  @Prop()
-  updatedAt: Date;
-
-  @Prop()
-  updatedBy: number;
 
   @Prop({ enum: ["ACTIVE", "INACTIVE", "BANNED"], default: "ACTIVE" })
   status: string;
