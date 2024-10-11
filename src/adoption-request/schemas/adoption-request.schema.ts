@@ -7,17 +7,17 @@ import { AdoptionStatus } from "../enums/adoption-status.enum";
 @Schema({
     timestamps: true,
 })
-export class AdoptionRequest{
-    @Prop({type: [{type: mongoose.Schema.Types.ObjectId, ref: 'Pet'}]})
+export class AdoptionRequest {
+    @Prop({type: mongoose.Schema.Types.ObjectId, ref: 'Pet'})
     petId: Pet;
 
-    @Prop({type: [{type: mongoose.Schema.Types.ObjectId, ref: 'User'}]})
+    @Prop({type: mongoose.Schema.Types.ObjectId, ref: 'User'})
     userId: User;
 
     @Prop()
     requestDate: Date;
-    
-    @Prop({type: [{type: mongoose.Schema.Types.ObjectId, ref: 'User'}]})
+
+    @Prop({type: mongoose.Schema.Types.ObjectId, ref: 'User'})
     reviewBy: User;
 
     @Prop()
@@ -28,8 +28,9 @@ export class AdoptionRequest{
 
     @Prop({
         type: String,
-        enum:  AdoptionStatus
+        enum: AdoptionStatus,
     })
-    status: AdoptionStatus
+    status: AdoptionStatus;
 }
+
 export const AdoptionRequestSchema = SchemaFactory.createForClass(AdoptionRequest);
