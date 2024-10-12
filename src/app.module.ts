@@ -14,6 +14,7 @@ import {
   AutoIncrementIDOptions,
 } from "@typegoose/auto-increment";
 import { User, UserSchema } from "./auth/schemas/user.schema";
+import { FeedbackModule } from './feedback/feedback.module';
 
 @Module({
   imports: [
@@ -37,6 +38,7 @@ import { User, UserSchema } from "./auth/schemas/user.schema";
     ShelterModule,
     HealthCheckModule,
     AdoptionRequestModule,
+    FeedbackModule,
   ],
   controllers: [AppController],
   providers: [AppService],
