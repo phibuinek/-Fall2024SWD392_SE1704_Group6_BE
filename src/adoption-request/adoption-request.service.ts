@@ -14,7 +14,7 @@ export class AdoptionRequestService {
 
     async createAdoptionRequest(createAdoptionRequestDto: CreateAdoptionRequestDto): Promise<AdoptionRequest> {
         const newAdoptionRequest = new this.adoptionRequestModel(createAdoptionRequestDto);
-        return newAdoptionRequest.save(); // Lưu vào cơ sở dữ liệu
+        return newAdoptionRequest.save(); 
     }
 
     async findByPetId(petId: string): Promise<AdoptionRequest[]> {

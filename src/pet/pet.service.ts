@@ -27,7 +27,7 @@ export class PetService {
           color: 'Brown',
           breed: 'Labrador',
           age: 3,
-          species: 1,
+          gender: "female",
           isVacinted: true,
           isVerified: true,
           deliveryStatus: DeliveryStatus.PENDING,
@@ -47,7 +47,7 @@ export class PetService {
           color: 'Black',
           breed: 'Siamese',
           age: 2,
-          species: 2, // Có thể xác định loại động vật
+          gender: "male",
           isVacinted: false,
           isVerified: true,
           deliveryStatus: DeliveryStatus.PENDING,
@@ -82,6 +82,38 @@ export class PetService {
     return pet;
   }
 
+  async findByColor(colorSearch: string): Promise<Pet[]>{
+    const pets = await this.petModel.find({color : { $regex: new RegExp(colorSearch, 'i') }}).exec();
+    if(!pets || pets.length === 0){
+      throw new NotFoundException(`No pets found with color: ${colorSearch}`);
+    }
+    return pets
+  }
+
+  async findByBreed(breedSearch: string): Promise<Pet[]>{
+    const pets = await this.petModel.find({breed: { $regex: new RegExp(breedSearch, 'i') }}).exec();
+    if(!pets || pets.length === 0){
+      throw new NotFoundException(`No  pets found with breed: ${breedSearch}`);
+    }
+    return pets
+  }
+
+  async findByAge(ageSearch: number): Promise<Pet[]>{
+    const pets = await this.petModel.find({age: ageSearch}).exec()
+      if(!pets || pets.length === 0){
+        throw new NotFoundException(`No pet found with age: ${ageSearch}`);
+      }
+    return pets;
+  }
+
+  async viewPetAdoptable(): Promise<Pet[]>{
+    const pets = await this.petModel.find({isAdopted: false}).exec();
+    if(!pets || pets.length === 0){
+      throw new NotFoundException(`No adoptable pet found`);
+    }
+  return pets;
+  }
+  
   async update(id: string, updatePetDto: UpdatePetDto): Promise<Pet> {
     const updatedPet = await this.petModel
       .findByIdAndUpdate(id, updatePetDto, { new: true })
