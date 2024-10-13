@@ -26,4 +26,6 @@ export class AdoptionRequestController {
     async updateStatus(@Param('id') id: string, @Body() updateStatusDto: UpdateStatusDto) {
         return this.adoptionRequestService.updateStatus(id, updateStatusDto);
     }
+
+    
 }

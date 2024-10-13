@@ -3,6 +3,8 @@ import mongoose, { Document } from "mongoose";
 import { User } from "src/auth/schemas/user.schema";
 import { DeliveryStatus } from "../enums/delivery-status.enum";
 import { PetStatus } from "../enums/pet-status.enum";
+import { Type } from "class-transformer";
+import { IsDate } from "class-validator";
 
 export type PetDocument = Pet & Document;
 
@@ -32,6 +34,9 @@ export class Pet {
   @Prop({ required: true, min: 0, max: 30 })
   age: number;
 
+  @Prop({required: true})
+  gender: string;
+
   @Prop()
   isVacinted: boolean;
 
@@ -48,8 +53,8 @@ export class Pet {
   @Prop()
   note?: string;
 
-  // @Prop({ required: false })
-  // rescueDate: Date;
+  @Prop({ required: false })
+  rescueDate: Date;
 
   @Prop()
   rescueBy: String;
