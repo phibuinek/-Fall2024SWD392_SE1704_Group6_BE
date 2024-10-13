@@ -35,4 +35,9 @@ export class AdoptionRequestService {
         }
         return updatedRequest ;
     }
+    async findAll(): Promise<AdoptionRequest[]>{
+        const adoptinRequests = await this.adoptionRequestModel.find().exec();
+        return adoptinRequests;
+    }
+ 
 }

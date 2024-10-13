@@ -17,6 +17,11 @@ export class AdoptionRequestController {
         return this.adoptionRequestService.createAdoptionRequest(createAdoptionRequestDto);
     }
 
+    @Get("find-all")
+    async findAll(){
+        return this.adoptionRequestService.findAll();
+    }
+    
     @Get('find-by-pet/:petId') // Đường dẫn để tìm kiếm theo petId
     async findByPetId(@Param('petId') petId: string) {
         return this.adoptionRequestService.findByPetId(petId);
