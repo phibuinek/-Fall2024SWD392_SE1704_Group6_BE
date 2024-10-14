@@ -4,6 +4,7 @@ import { CreateAdoptionRequestDto } from './dto/create-adoption-request.dto';
 import { ApiTags } from '@nestjs/swagger';
 import { AdoptionStatus } from './enums/adoption-status.enum';
 import { UpdateStatusDto } from './dto/update-status.dto';
+import { ObjectId } from 'mongoose';
 
 @ApiTags('adoption-requests')
 @Controller('adoption-requests')
@@ -27,10 +28,13 @@ export class AdoptionRequestController {
         return this.adoptionRequestService.findByPetId(petId);
     }
 
+    @Get('find-by-user/:userId')
+    async findByUserId(@Param('userId') userId: string){
+        return this.adoptionRequestService.findByUserId(userId);
+    }
+
     @Put('update-status/:id')
     async updateStatus(@Param('id') id: string, @Body() updateStatusDto: UpdateStatusDto) {
         return this.adoptionRequestService.updateStatus(id, updateStatusDto);
     }
-
-    
 }

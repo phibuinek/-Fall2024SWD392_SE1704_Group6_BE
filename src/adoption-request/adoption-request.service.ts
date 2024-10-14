@@ -1,6 +1,6 @@
 import { Injectable, NotFoundException } from '@nestjs/common';
 import { InjectModel } from '@nestjs/mongoose';
-import { Model } from 'mongoose';
+import { Model, ObjectId } from 'mongoose';
 import { AdoptionRequest } from './schemas/adoption-request.schema';
 import { CreateAdoptionRequestDto } from './dto/create-adoption-request.dto';
 import { AdoptionStatus } from './enums/adoption-status.enum';
@@ -40,4 +40,8 @@ export class AdoptionRequestService {
         return adoptinRequests;
     }
  
+    async findByUserId(userId: string): Promise<AdoptionRequest[]>{
+        const adoptinRequests = await this.adoptionRequestModel.find({userId: userId}).exec();
+        return adoptinRequests;
+    }
 }
