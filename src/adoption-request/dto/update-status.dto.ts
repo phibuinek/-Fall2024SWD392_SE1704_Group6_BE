@@ -13,4 +13,5 @@ export class UpdateStatusDto {
         example: 'Reason why approve or reject',
     })
     comment: string;
+
 }

@@ -25,15 +25,28 @@ export class AdoptionRequestService {
         return adoptionRequests;
     }
     async updateStatus(id: string, updateStatusDto: UpdateStatusDto): Promise<AdoptionRequest> {
-        const updatedRequest  = await this.adoptionRequestModel.findByIdAndUpdate(
-            id,
-            { status: updateStatusDto.status, comment: updateStatusDto.comment },
-            { new: true }
-        );
-        if (!updatedRequest ) {
-            throw new NotFoundException('Adoption request not found');
+        if (updateStatusDto.status === AdoptionStatus.APPROVED || updateStatusDto.status === AdoptionStatus.REJECTED){
+            const updatedRequest  = await this.adoptionRequestModel.findByIdAndUpdate(
+                id,
+                { status: updateStatusDto.status, comment: updateStatusDto.comment, adoptionDate: Date.now()},
+                { new: true }
+            );
+            if (!updatedRequest ) {
+                throw new NotFoundException('Adoption request not found');
+            }
+            return updatedRequest ;
         }
-        return updatedRequest ;
+        if (updateStatusDto.status === AdoptionStatus.COMPLETED){
+            const updatedRequest  = await this.adoptionRequestModel.findByIdAndUpdate(
+                id,
+                { status: updateStatusDto.status, comment: updateStatusDto.comment},
+                { new: true }
+            );
+            if (!updatedRequest ) {
+                throw new NotFoundException('Adoption request not found');
+            }
+            return updatedRequest ;
+        }
     }
     async findAll(): Promise<AdoptionRequest[]>{
         const adoptinRequests = await this.adoptionRequestModel.find().exec();
