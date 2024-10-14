@@ -28,7 +28,6 @@ export class CreateAdoptionRequestDto {
     comment?: string;
 
     @IsOptional()
-    @IsDate()
     @Type(() => Date) // Chuyển đổi thành đối tượng Date
     @ApiProperty({ example: '2024-10-05T12:00:00Z' })
     adoptionDate?: Date;
