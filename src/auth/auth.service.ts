@@ -6,8 +6,7 @@ import * as bcrypt from "bcryptjs";
 import { JwtService } from "@nestjs/jwt";
 import { SignUpDto } from "./dto/signup.dto";
 import { LoginDto } from "./dto/login.dto";
-import { Role } from "./enums/role.enum";
-import { AccountStatus } from "./enums/account-status.enum";
+import * as nodemailer from "nodemailer";
 
 @Injectable()
 export class AuthService {
@@ -15,49 +14,43 @@ export class AuthService {
     @InjectModel(User.name)
     private userModel: Model<User>,
     private jwtService: JwtService,
-  ) { }
-   // Tạo data mẫu
-   async onModuleInit() {
-    const users = await this.userModel.find().exec();
+  ) {}
 
-    if (users.length === 0) {
-      const defaultPassword = await bcrypt.hash('123456', 10);
+  async sendVerificationEmail(email: string, token: string) {
+    const transporter = nodemailer.createTransport({
+      service: "Gmail",
+      auth: {
+        user: "lehuynhminhtri09082003@mail.com",
+        pass: "mfsr fmdv hyzt wkir",
+      },
+    });
 
-      await this.userModel.create([
-        {
-          name: 'ShelterStaff',
-          email: 'ShelterStaff@gmail.com',
-          password: defaultPassword,
-          avatar: 'default-avatar.png',
-          role: Role.SHELTER_STAFF, // Role là SHELTER_STAFF
-          status: 'ACTIVE',
-        },
-        {
-          name: 'Admin',
-          email: 'Admin@gmail.com',
-          password: defaultPassword,
-          avatar: 'default-avatar.png',
-          role: Role.ADMIN, // Role là ADMIN
-          status: 'ACTIVE',
-        },
-        {
-          name: 'Customer',
-          email: 'customer@gmail.com',
-          password: defaultPassword,
-          avatar: 'default-avatar.png',
-          role: Role.CUSTOMER, // Role là CUSTOMER
-          status: 'ACTIVE',
-        },
-      ]);
+    const mailOptions = {
+      from: "lehuynhminhtri09082003@mail.com",
+      to: email,
+      subject: "Verify your email",
+      text: `Please verify your email by clicking the following link: http://localhost:3000/auth/verify-email?token=${token}`,
+    };
 
-      console.log('Sample users created!');
-    } else {
-      console.log('Sample data already exists.');
+    await transporter.sendMail(mailOptions);
+  }
+  async verifyEmail(token: string): Promise<string> {
+    try {
+      const decoded = this.jwtService.verify(token);
+      const user = await this.userModel.findById(decoded.id);
+      if (!user) {
+        throw new UnauthorizedException("Invalid token");
+      }
+      user.isEmailVerified = true;
+      await user.save();
+      return "Email verified successfully";
+    } catch (error) {
+      throw new UnauthorizedException("Invalid or expired token");
     }
   }
 
-  async signUp(signUpDto: SignUpDto): Promise<{ token: string }> {
-    const { name, email, password, avatar, address, phone, role } = signUpDto;
+  async signUp(signUpDto: SignUpDto): Promise<{ message: string }> {
+    const { name, email, password, role } = signUpDto;
 
     const hashedPassword = await bcrypt.hash(password, 10);
 
@@ -65,14 +58,15 @@ export class AuthService {
       name,
       email,
       password: hashedPassword,
-      avatar,
-      address,
-      phone,
       role,
-      status: AccountStatus.ACTIVE,
+      isEmailVerified: false,
     });
-    const token = this.jwtService.sign({ id: user._id });
-    return { token };
+
+    const emailVerificationToken = this.jwtService.sign({ id: user._id });
+
+    await this.sendVerificationEmail(email, emailVerificationToken);
+
+    return { message: "Please check your email to verify your account." };
   }
 
   async login(loginDto: LoginDto): Promise<{ token: string }> {
@@ -81,11 +75,16 @@ export class AuthService {
     if (!user) {
       throw new UnauthorizedException("Invalid email or password");
     }
+    if (!user.isEmailVerified) {
+      throw new UnauthorizedException(
+        "Please verify your email before logging in",
+      );
+    }
     const isPasswordMatched = await bcrypt.compare(password, user.password);
     if (!isPasswordMatched) {
       throw new UnauthorizedException("Invalid email or password");
     }
-    const token = this.jwtService.sign({ id: user._id});
+    const token = this.jwtService.sign({ id: user._id });
     return { token };
   }
 }
