@@ -33,7 +33,7 @@ export class User {
   @Prop({ required: true })
   roleId: number;
 
-  @Prop({ enum: Role, default: Role.Customers })
+  @Prop({ enum: Role, default: Role.CUSTOMER })
   role: Role;
 
   @Prop({ default: Date.now })
