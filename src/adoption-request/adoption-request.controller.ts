@@ -1,4 +1,4 @@
-import { Controller, Post, Body, Get, Param, Put } from '@nestjs/common';
+import { Controller, Post, Body, Get, Param, Put, Delete } from '@nestjs/common';
 import { AdoptionRequestService } from './adoption-request.service';
 import { CreateAdoptionRequestDto } from './dto/create-adoption-request.dto';
 import { ApiTags } from '@nestjs/swagger';
@@ -36,5 +36,10 @@ export class AdoptionRequestController {
     @Put('update-status/:id')
     async updateStatus(@Param('id') id: string, @Body() updateStatusDto: UpdateStatusDto) {
         return this.adoptionRequestService.updateStatus(id, updateStatusDto);
+    }
+    
+    @Delete('delete/:id')
+    async delete(@Param('id') id: string){
+        return this.adoptionRequestService.delete(id);
     }
 }

@@ -57,4 +57,12 @@ export class AdoptionRequestService {
         const adoptinRequests = await this.adoptionRequestModel.find({userId: userId}).exec();
         return adoptinRequests;
     }
+    
+    async delete(adoptionRequestId: String): Promise<AdoptionRequest>{
+        const deleteAdoptionRequest = await this.adoptionRequestModel.findByIdAndDelete(adoptionRequestId).exec();
+        if (!deleteAdoptionRequest){
+            throw new NotFoundException(`No adoption request with id ${adoptionRequestId} not found`);
+        }
+        return deleteAdoptionRequest;
+    }
 }
