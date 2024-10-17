@@ -5,16 +5,14 @@ import { DeliveryStatus } from "../enums/delivery-status.enum";
 import { PetStatus } from "../enums/pet-status.enum";
 import { Type } from "class-transformer";
 import { IsDate } from "class-validator";
+import { DataZone } from "aws-sdk";
 
 export type PetDocument = Pet & Document;
 
 @Schema()
 export class Pet {
-  @Prop()
-  shelterId: number;
-
-  @Prop({ unique: true })
-  petCode: string;
+  @Prop({ type: mongoose.Schema.Types.ObjectId, ref: 'Shelter', required: true })
+  shelterId: mongoose.Schema.Types.ObjectId;
 
   @Prop({ required: true })
   image: string;
@@ -37,13 +35,13 @@ export class Pet {
   @Prop({required: true})
   gender: string;
 
-  @Prop()
+  @Prop({default: false})
   isVacinted: boolean;
 
-  @Prop()
+  @Prop({required: false, default: false})
   isVerified: boolean;
 
-  @Prop({ type: String, enum: DeliveryStatus, default: DeliveryStatus.PENDING })
+  @Prop({ type: String, enum: DeliveryStatus, default: DeliveryStatus.INPROCESS })
   deliveryStatus: DeliveryStatus;
 
 
@@ -53,7 +51,11 @@ export class Pet {
   @Prop()
   note?: string;
 
-  @Prop({ required: false })
+  @Prop({ required: false, default: () => {
+    const now = new Date();
+    now.setHours(now.getHours() + 7);
+    return now;
+}})
   rescueDate: Date;
 
   @Prop()

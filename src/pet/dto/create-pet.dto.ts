@@ -5,14 +5,10 @@ import { PetStatus } from '../enums/pet-status.enum';
 import { Type } from 'class-transformer';
 
 export class CreatePetDto {
-  @ApiProperty({ example: 1 })
+  @ApiProperty({ example: "Location A" })
   @IsOptional()
-  @IsNumber()
-  shelterId?: number;
-
-  @ApiProperty({ example: 'PET123' })
   @IsString()
-  petCode: string;
+  shelterLocation: string;
 
   @ApiProperty({ example: 'https://example.com/image.jpg' })
   @IsString()
@@ -44,35 +40,14 @@ export class CreatePetDto {
   @IsString()
   gender: string;
 
-  @ApiProperty({ example: true })
-  @IsOptional()
-  isVacinted?: boolean;
-
-  @ApiProperty({ example: false })
-  @IsOptional()
-  isVerified?: boolean;
-
-  @ApiProperty({ example: DeliveryStatus.PENDING })
-  @IsOptional()
-  @IsEnum(DeliveryStatus)
-  deliveryStatus?: DeliveryStatus = DeliveryStatus.PENDING;
-
-  @ApiProperty({ example: false })
-  @IsOptional()
-  isAdopted?: boolean = false;
-
   @ApiProperty({ example: 'Rescue from the street.' })
   @IsOptional()
   @IsString()
   note?: string;
 
-  @ApiProperty({ example: '2024-10-03T12:00:00Z' }) 
-  @IsDate()
-  @Type(() => Date)
-  rescueDate: Date;
-
-  @ApiProperty({ example: '60e6b8e2f1a2b93f68f87c6d' }) // Ví dụ về ObjectId của User
+  @ApiProperty({example: '6710ceed287697ec4b88b615'}) 
   @IsString()
+  @IsOptional()
   rescueBy: string;
 
   @ApiProperty({ example: 100 })
@@ -82,8 +57,4 @@ export class CreatePetDto {
   @ApiProperty({ example: 'Park' })
   @IsString()
   locationFound: string;
-
-  @ApiProperty({ example: PetStatus.AVAILABLE })
-  @IsEnum(PetStatus)
-  petStatus?: PetStatus = PetStatus.AVAILABLE;
 }
