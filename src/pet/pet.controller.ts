@@ -15,6 +15,7 @@ import { UpdatePetDto } from "./dto/update-pet.dto";
 import { ApiTags } from "@nestjs/swagger";
 import { DeliveryStatus } from "./enums/delivery-status.enum";
 import { UpdateDeliveryStatusDTO } from "./dto/update-delivery-status.dto";
+import { Request } from "express";
 
 @ApiTags("Pet")
 @Controller("pet")
