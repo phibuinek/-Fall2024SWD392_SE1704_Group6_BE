@@ -1,4 +1,4 @@
-import { Controller, Get, Post, Body, Patch, Param, Delete } from '@nestjs/common';
+import { Controller, Get, Post, Body, Param, Delete, Put } from '@nestjs/common';
 import { VolunteerTaskService } from './volunteer-task.service';
 import { CreateVolunteerTaskDto } from './dto/create-volunteer-task.dto';
 import { UpdateVolunteerTaskDto } from './dto/update-volunteer-task.dto';
@@ -22,7 +22,7 @@ export class VolunteerTaskController {
     return this.volunteerTaskService.findOne(id);
   }
 
-  @Patch(':id')
+  @Put(':id')
   update(@Param('id') id: string, @Body() updateVolunteerTaskDto: UpdateVolunteerTaskDto) {
     return this.volunteerTaskService.update(id, updateVolunteerTaskDto);
   }
