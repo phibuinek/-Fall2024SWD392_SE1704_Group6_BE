@@ -29,9 +29,6 @@ export class Pet {
   @Prop({ required: true })
   breed: string;
 
-  @Prop({ required: true, min: 0, max: 30 })
-  age: number;
-
   @Prop({required: true})
   gender: string;
 

@@ -25,10 +25,6 @@ export class UpdatePetDto {
     @IsString()
     breed: string;
 
-    @ApiProperty({ example: 5 })
-    @IsNumber()
-    age: number;
-
     @ApiProperty({ example: "male" })
     @IsString()
     gender: string;

@@ -94,7 +94,7 @@ export class UserService {
           status: AccountStatus.ACTIVE,
           address: "123 A street",
           phone: "0909123456",
-          avatar: "https://www.google.com/imgres?q=h%C3%ACnh%20%E1%BA%A3nh%20avatar&imgurl=https%3A%2F%2Fi.pinimg.com%2F564x%2F92%2F26%2F5c%2F92265c40c8e428122e0b32adc1994594.jpg&imgrefurl=https%3A%2F%2Fwww.pinterest.com%2Fpin%2F540994973993086728%2F&docid=DTqdxqT14tLX2M&tbnid=_ULHsdybNXHSGM&vet=12ahUKEwiC4qjd86aJAxV_3jQHHQa5CuwQM3oECG8QAA..i&w=564&h=564&hcb=2&ved=2ahUKEwiC4qjd86aJAxV_3jQHHQa5CuwQM3oECG8QAA",
+          avatar: "https://scontent.fsgn5-13.fna.fbcdn.net/v/t39.30808-1/462134380_864832139089773_5178661578371967629_n.jpg?stp=dst-jpg_s200x200&_nc_cat=107&ccb=1-7&_nc_sid=0ecb9b&_nc_eui2=AeFXKJEEqVdA0MlN52C3D2W5WGSaJ5eJCsNYZJonl4kKw090K5o37PLARz5klhlOwy79DbRJK0JV5W5cCkBOPRhi&_nc_ohc=ra-UmIPRQBYQ7kNvgH6GJAP&_nc_zt=24&_nc_ht=scontent.fsgn5-13.fna&_nc_gid=A2eIpl98jZBKKo6Dkws5M56&oh=00_AYCpTuo9XpB3PGyp6niuOT7_DtWDh4a1a_tdUyH57S-7OQ&oe=672171EF",
         },
       ]);
       console.log("Sample users created!")
