@@ -168,7 +168,7 @@ export class PetService {
     petId: string,
     updateDeliveryStatusDto: UpdateDeliveryStatusDTO,): Promise<Pet> {
     const updateDeliveryStatus = await this.petModel.findOneAndUpdate(
-      {petId, petStatus: PetStatus.AVAILABLE},
+      {_id: petId, petStatus: PetStatus.AVAILABLE},
       { deliveryStatus: updateDeliveryStatusDto.deliveryStatus },
       { new: true },
     );
