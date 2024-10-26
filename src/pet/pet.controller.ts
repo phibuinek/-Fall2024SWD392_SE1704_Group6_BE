@@ -42,23 +42,28 @@ export class PetController {
   }
 
   @Get("find-by-color/:color")
-  findByColor(@Param("color") color: string) {
+  async findByColor(@Param("color") color: string) {
     return this.petService.findByColor(color);
   }
 
   @Get("find-by-breed/:breed")
-  findByBreed(@Param("breed") breed: string) {
+  async findByBreed(@Param("breed") breed: string) {
     return this.petService.findByBreed(breed);
   }
 
   @Get("find-by-age/:age")
-  findByAge(@Param("age") age: number) {
+  async findByAge(@Param("age") age: number) {
     return this.petService.findByAge(age);
   }
 
   @Get("view-adoptable-pet")
-  viewAdoptablePet() {
+  async viewAdoptablePet() {
     return this.petService.viewPetAdoptable();
+  }
+
+  @Get('view-by-volunteer/:volunteerId')
+  async viewByVolunteer(@Param("volunteerId") volunteerId: string){
+    return this.petService.viewPetByVolunteer(volunteerId);
   }
 
   @Put("update/:id")
