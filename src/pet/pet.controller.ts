@@ -1,8 +1,10 @@
+import { NotificationService } from "./../notification/notification.service";
 import {
   Controller,
   Get,
   Post,
   Body,
+  Patch,
   Param,
   Delete,
   Req,
@@ -15,7 +17,6 @@ import { ApiTags } from "@nestjs/swagger";
 import { DeliveryStatus } from "./enums/delivery-status.enum";
 import { UpdateDeliveryStatusDTO } from "./dto/update-delivery-status.dto";
 import { Request } from "express";
-import { NotificationService } from "src/notification/notification.service";
 
 @ApiTags("Pet")
 @Controller("pet")
@@ -73,11 +74,13 @@ export class PetController {
   ) {
     // Thực hiện xóa thú cưng
     const result = await this.petService.remove(petId);
+
     // Kiểm tra nếu xóa thành công
     if (result) {
       // Gửi thông báo chỉ khi xóa thành công
       await this.notificationService.deletePet(userId, petId, petName);
     }
+
     // Trả về kết quả xóa thú cưng
     return result;
   }
