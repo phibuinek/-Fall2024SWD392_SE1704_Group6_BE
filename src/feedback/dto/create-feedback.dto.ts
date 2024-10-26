@@ -33,7 +33,7 @@ export class CreateFeedbackDto {
   @IsNotEmpty()
   @IsNumber()
   @Min(1)
-  @Max(5)
+  @Max(10)
   @ApiProperty({
     example: 5
   })

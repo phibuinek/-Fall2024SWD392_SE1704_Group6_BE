@@ -51,11 +51,6 @@ export class PetController {
     return this.petService.findByBreed(breed);
   }
 
-  @Get("find-by-age/:age")
-  async findByAge(@Param("age") age: number) {
-    return this.petService.findByAge(age);
-  }
-
   @Get("view-adoptable-pet")
   async viewAdoptablePet() {
     return this.petService.viewPetAdoptable();
@@ -71,22 +66,9 @@ export class PetController {
     return this.petService.update(id, updatePetDto);
   }
 
-  @Delete("delete/:id")
-  async remove(
-    @Param("id") petId: string,
-    @Body("userId") userId: string,
-    @Body("petName") petName: string,
-  ) {
-    // Thực hiện xóa thú cưng
+  @Put("delete/:id")
+  async remove(@Param("id") petId: string,) {
     const result = await this.petService.remove(petId);
-
-    // Kiểm tra nếu xóa thành công
-    if (result) {
-      // Gửi thông báo chỉ khi xóa thành công
-      await this.notificationService.deletePet(userId, petId, petName);
-    }
-
-    // Trả về kết quả xóa thú cưng
     return result;
   }
 
@@ -96,5 +78,20 @@ export class PetController {
     @Body() updateDeliveryStatusDto: UpdateDeliveryStatusDTO,
   ) {
     return this.petService.updateDeliveryStatus(petId, updateDeliveryStatusDto);
+  }
+
+  @Put("upate-pet-adopted/:petId")
+  async udpatePetAdopted(@Param("petId") petId: string){
+    return this.petService.udpatePetAdopted(petId);
+  }
+
+  @Put("update-pet-verified/:petId")
+  async updatePetVerified(@Param("petId") petId: string){
+    return this.petService.updatePetVerified(petId);
+  }
+
+  @Put("udpate-pet-vacinted/:petId")
+  async udpatePetVacinted(@Param("petId") petId: string){
+    return this.petService.updatePetVacinted(petId);
   }
 }
