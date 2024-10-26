@@ -25,8 +25,6 @@ export class ShelterService implements OnModuleInit {
                     managedBy: manageByDefault._id,
                     phone: '123456789',
                     email: 'shelterA@example.com',
-                    quanity: 5,
-                    capacity: 10,
                     availble: 5,
                     status: ShelterStatus.AVAILABLE,
                 },
@@ -47,10 +45,7 @@ export class ShelterService implements OnModuleInit {
         if (!managedBy) {
             throw new NotFoundException(`Shelter Staff account not found`);
         }
-        const newShelter = new this.shelterModel({
-            ...createShelterDto,
-            availble: createShelterDto.capacity,
-        });
+        const newShelter = new this.shelterModel(createShelterDto,);
         return newShelter.save();
     }
 

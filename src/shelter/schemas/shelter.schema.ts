@@ -24,15 +24,7 @@ export class Shelter{
 
     @Prop({unique: true})
     email: string;
-
-    @Prop({
-        default: 0,
-    })
-    quanity: number;
-
-    @Prop() 
-    capacity: number;
-
+    
     @Prop({
         default: 0,
     })
