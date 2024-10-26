@@ -19,6 +19,7 @@ export class CreateShelterDto{
     @ApiProperty({
         example: ""
     })
+    @IsOptional()
     managedBy: string;
 
     @IsNotEmpty()
@@ -37,5 +38,5 @@ export class CreateShelterDto{
     @ApiProperty({
         example: 0,
     })
-    capacity: number;
+    available: number;
 }
