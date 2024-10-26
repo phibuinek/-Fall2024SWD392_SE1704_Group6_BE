@@ -17,10 +17,11 @@ import { AdoptionRequestModule } from "./adoption-request/adoption-request.modul
 import { PaymentService } from "./payment/payment.service";
 import { PaymentController } from "./payment/payment.controller";
 import { PaymentModule } from "./payment/payment.module";
-import { NotificationModule } from "./notification/notification.module";
 import { NotificationGateway } from "./notification/notification.gateway";
 import { NotificationService } from "./notification/notification.service";
 import { NotificationController } from "./notification/notification.controller";
+import { NotificationModule } from "./notification/notification.module";
+import { VolunteerTaskModule } from "./volunteer-task/volunteer-task.module";
 
 @Module({
   imports: [
@@ -45,14 +46,10 @@ import { NotificationController } from "./notification/notification.controller";
     HealthCheckModule,
     AdoptionRequestModule,
     PaymentModule,
+    VolunteerTaskModule,
     NotificationModule,
   ],
   controllers: [AppController, PaymentController, NotificationController],
-  providers: [
-    AppService,
-    PaymentService,
-    NotificationGateway,
-    NotificationService,
-  ],
+  providers: [AppService, PaymentService],
 })
 export class AppModule {}
