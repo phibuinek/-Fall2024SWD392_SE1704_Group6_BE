@@ -43,7 +43,7 @@ export class FeedbackController {
     return this.feedbackService.findByUserId(userId);
   }
 
-  @Put("udpate/:id")
+  @Put("update/:id")
   async update(
     @Param("id") id: string,
     @Body() updateFeedbackDto: UpdateFeedbackDto,

@@ -23,6 +23,7 @@ import { NotificationController } from "./notification/notification.controller";
 import { NotificationModule } from "./notification/notification.module";
 import { VolunteerTaskModule } from "./volunteer-task/volunteer-task.module";
 import { FeedbackModule } from "./feedback/feedback.module";
+import { EventModule } from "./event/event.module";
 
 @Module({
   imports: [
@@ -50,6 +51,7 @@ import { FeedbackModule } from "./feedback/feedback.module";
     VolunteerTaskModule,
     NotificationModule,
     FeedbackModule,
+    EventModule,
   ],
   controllers: [AppController, PaymentController, NotificationController],
   providers: [AppService, PaymentService],

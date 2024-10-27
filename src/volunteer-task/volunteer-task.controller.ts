@@ -34,7 +34,7 @@ export class VolunteerTaskController {
     return this.volunteerTaskService.findByAssignBy(id);
   }
 
-  @Put('udpate/:id')
+  @Put('update/:id')
   async doingTask(@Param("id") id: string, @Body() updateVolunteerTaskDto: UpdateVolunteerTaskDto){
     return this.volunteerTaskService.updateTaskProcess(id, updateVolunteerTaskDto);
   }
