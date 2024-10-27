@@ -4,15 +4,15 @@ import { Document, Types } from "mongoose";
 export type VolunteerTaskDocument = VolunteerTask & Document;
 
 export enum Priority {
-  LOW = "Low",
-  MEDIUM = "Medium",
-  HIGH = "High",
+  LOW = "LOW",
+  MEDIUM = "MEDIUM",
+  HIGH = "HIGH",
 }
 
 export enum Status {
-  PENDING = "Pending",
-  IN_PROGRESS = "InProgress",
-  COMPLETED = "Completed",
+  PENDING = "PENDING",
+  IN_PROGRESS = "IN_PROGRESS",
+  COMPLETED = "COMPLETED",
 }
 
 @Schema({ timestamps: true })

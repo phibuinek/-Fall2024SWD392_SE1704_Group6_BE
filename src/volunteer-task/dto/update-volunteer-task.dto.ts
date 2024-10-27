@@ -9,7 +9,7 @@ export class UpdateVolunteerTaskDto {
     @IsEnum(Status)
     @IsNotEmpty()
     @ApiProperty({
-        example: "IN_PROCESS"
+        example: "IN_PROGRESS"
     })
     status: Status;
 }
