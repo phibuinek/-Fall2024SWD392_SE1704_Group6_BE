@@ -80,7 +80,7 @@ export class PetController {
     return this.petService.updateDeliveryStatus(petId, updateDeliveryStatusDto);
   }
 
-  @Put("upate-pet-adopted/:petId")
+  @Put("update-pet-adopted/:petId")
   async udpatePetAdopted(@Param("petId") petId: string){
     return this.petService.udpatePetAdopted(petId);
   }
@@ -90,7 +90,7 @@ export class PetController {
     return this.petService.updatePetVerified(petId);
   }
 
-  @Put("udpate-pet-vacinted/:petId")
+  @Put("update-pet-vacinted/:petId")
   async udpatePetVacinted(@Param("petId") petId: string){
     return this.petService.updatePetVacinted(petId);
   }

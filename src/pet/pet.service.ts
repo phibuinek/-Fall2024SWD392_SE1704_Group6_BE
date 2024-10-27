@@ -140,7 +140,7 @@ export class PetService {
 
   async update(id: string, updatePetDto: UpdatePetDto): Promise<Pet> {
     const updatedPet = await this.petModel
-      .findOneAndUpdate({id, petStatus: PetStatus.AVAILABLE}, updatePetDto, { new: true })
+      .findOneAndUpdate({_id: id, petStatus: PetStatus.AVAILABLE}, updatePetDto, { new: true })
       .exec();
 
     if (!updatedPet) {
