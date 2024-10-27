@@ -17,28 +17,34 @@ export enum Status {
 
 @Schema({ timestamps: true })
 export class VolunteerTask {
-  @Prop({ type: Types.ObjectId, ref: "User", required: true }) // Tham chiếu tới User (AssignedTo)
+  @Prop({ type: Types.ObjectId, ref: "User", required: true }) 
   assignedTo: Types.ObjectId;
 
-  @Prop({ type: Types.ObjectId, ref: "User", required: true }) // Tham chiếu tới User (AssignedBy)
+  @Prop({ type: Types.ObjectId, ref: "User", required: true }) 
   assignedBy: Types.ObjectId;
 
-  @Prop({ type: Date, default: Date.now }) // Thời gian được giao
+  @Prop({
+    type: Date, default: () => {
+      const now = new Date();
+      now.setHours(now.getHours() + 7);
+      return now;
+    }
+  })
   assignedDate: Date;
 
-  @Prop({ type: String, required: true }) // Mô tả công việc
+  @Prop({ type: String, required: true }) 
   taskDescription: string;
 
-  @Prop({ type: Date }) // Ngày hết hạn
+  @Prop({ type: Date }) 
   dueDate: Date;
 
-  @Prop({ type: Date }) // Ngày hoàn thành
+  @Prop({ type: Date, default: null }) 
   completedDate: Date;
 
-  @Prop({ type: String, enum: Priority, default: Priority.MEDIUM }) // Mức độ ưu tiên
+  @Prop({ type: String, enum: Priority, default: Priority.MEDIUM }) 
   priority: Priority;
 
-  @Prop({ type: String, enum: Status, default: Status.PENDING }) // Trạng thái công việc
+  @Prop({ type: String, enum: Status, default: Status.PENDING }) 
   status: Status;
 }
 

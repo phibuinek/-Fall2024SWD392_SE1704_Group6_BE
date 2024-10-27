@@ -16,9 +16,6 @@ export class Shelter{
     @Prop()
     location: string;
 
-    @Prop()
-    managedBy: string;
-
     @Prop({unique: true})
     phone: string;
 
