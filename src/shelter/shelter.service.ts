@@ -16,16 +16,30 @@ export class ShelterService implements OnModuleInit {
 
     async onModuleInit() {
         const shelters = await this.shelterModel.find().exec();
-        const manageByDefault = await this.userModel.findOne({ email: "shelterstaff@gmail.com" }).exec();
         if (shelters.length === 0) {
             await this.shelterModel.create([
                 {
                     name: "Shelter A",
                     location: 'Location A',
-                    managedBy: manageByDefault._id,
                     phone: '123456789',
                     email: 'shelterA@example.com',
-                    availble: 5,
+                    availble: 20,
+                    status: ShelterStatus.AVAILABLE,
+                },
+                {
+                    name: "Shelter B",
+                    location: 'Location B',
+                    phone: '0909123456',
+                    email: 'shelterB@example.com',
+                    availble: 100,
+                    status: ShelterStatus.AVAILABLE,
+                },
+                {
+                    name: "Shelter C",
+                    location: 'Location C',
+                    phone: '0808123456',
+                    email: 'shelterC@example.com',
+                    availble: 50,
                     status: ShelterStatus.AVAILABLE,
                 },
             ]);
@@ -41,10 +55,6 @@ export class ShelterService implements OnModuleInit {
     }
 
     async createShelter(createShelterDto: CreateShelterDto): Promise<Shelter> {
-        const managedBy = await this.userModel.findOne({ _id: createShelterDto.managedBy, role: Role.SHELTER_STAFF });
-        if (!managedBy) {
-            throw new NotFoundException(`Shelter Staff account not found`);
-        }
         const newShelter = new this.shelterModel(createShelterDto,);
         return newShelter.save();
     }

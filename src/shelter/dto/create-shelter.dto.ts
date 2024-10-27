@@ -17,13 +17,6 @@ export class CreateShelterDto{
 
     @IsNotEmpty()
     @ApiProperty({
-        example: ""
-    })
-    @IsOptional()
-    managedBy: string;
-
-    @IsNotEmpty()
-    @ApiProperty({
         example: "0909123455"
     })
     phone: string;
