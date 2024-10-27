@@ -24,6 +24,16 @@ export class VolunteerTaskController {
     return this.volunteerTaskService.findOne(id);
   }
 
+  @Get('view-assign-to/:id')
+  async viewAssignTo(@Param("id") id: string){
+    return this.volunteerTaskService.findByAssignTo(id);
+  }
+
+  @Get('view-assign-by/:id')
+  async viewAssignBy(@Param("id") id: string){
+    return this.volunteerTaskService.findByAssignBy(id);
+  }
+
   @Put('udpate/:id')
   async doingTask(@Param("id") id: string, @Body() updateVolunteerTaskDto: UpdateVolunteerTaskDto){
     return this.volunteerTaskService.updateTaskProcess(id, updateVolunteerTaskDto);

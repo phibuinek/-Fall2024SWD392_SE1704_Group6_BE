@@ -69,6 +69,26 @@ export class VolunteerTaskService {
     }
   }
 
+  async findByAssignTo(id: string): Promise<VolunteerTask[]>{
+    const volunteer = await this.userModel.findOne({_id: id});
+    if(!volunteer){
+      throw new NotFoundException(`You don't have permisson`);
+    }
+    const tasks = await this.volunteerTaskModel.find({assignedTo: id});
+    if (!tasks){
+      throw new NotFoundException(`You don't have any task`);
+    }
+    return tasks;
+  }
+
+  async findByAssignBy(id: string): Promise<VolunteerTask[]>{
+    const tasks = await this.volunteerTaskModel.find({assignedBy: id});
+    if(!tasks){
+      throw new NotFoundException(`You have never assigned task to anyone`);
+    }
+    return tasks;
+  }
+
   // Xóa công việc tình nguyện theo ID
   async remove(id: string): Promise<void> {
     const deletedVolunteerTask = await this.volunteerTaskModel

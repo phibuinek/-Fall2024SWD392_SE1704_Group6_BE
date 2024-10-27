@@ -42,7 +42,7 @@ export class CreateVolunteerTaskDto {
   @IsOptional()
   @IsEnum(Priority) 
   @ApiProperty({
-    example: "Low",
+    example: "LOW",
   })
   priority?: Priority;
 }
