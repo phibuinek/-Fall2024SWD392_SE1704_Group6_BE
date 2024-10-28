@@ -1,4 +1,4 @@
-import { IsDate, IsEnum, IsNotEmpty, IsString } from "class-validator";
+import { IsArray, IsDate, IsEnum, IsMongoId, IsNotEmpty, IsString } from "class-validator";
 import { EventStatus } from "../schemas/event.schema";
 import { Type } from "class-transformer";
 import { ApiProperty } from "@nestjs/swagger";
@@ -48,4 +48,11 @@ export class CreateEventDto {
     })
     location: string;
 
+    @IsNotEmpty()
+    @IsArray()
+    @ApiProperty({
+        example: ["", ""],
+        type: [String]
+    })
+    supporters: string[];
 }
