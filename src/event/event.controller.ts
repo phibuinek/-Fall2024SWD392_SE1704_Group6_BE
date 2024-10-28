@@ -32,6 +32,11 @@ export class EventController {
         return this.eventService.viewEventJoined(userId);
     }
 
+    @Get(`view-event-supported/:userId`)
+    async viewEventSupported(@Param("userId") userId: string) {
+        return this.eventService.viewEventSupported(userId);
+    }
+
     @Get('view-event-by-status/:status')
     async viewEventByStatus(@Param("status") status: EventStatus) {
         return this.eventService.viewEventByStatus(status);
@@ -44,6 +49,11 @@ export class EventController {
     @Put('join-event')
     async joinEvent(@Body() joinEventDto: JoinEventDto) {
         return this.eventService.joinEvent(joinEventDto);
+    }
+
+    @Put('support-event')
+    async supportEvent(@Body() joinEventDto: JoinEventDto) {
+        return this.eventService.supportEvent(joinEventDto);
     }
 
     @Put('update-status/:eventId')

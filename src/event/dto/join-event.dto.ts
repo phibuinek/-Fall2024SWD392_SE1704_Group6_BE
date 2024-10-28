@@ -16,3 +16,4 @@ export class JoinEventDto{
     })
     userId: string;
 }
+

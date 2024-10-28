@@ -35,6 +35,9 @@ export class Event {
 
     @Prop({ type: [String], ref: User.name, default: []}) // Mảng lưu trữ người tham gia
     participants: string[];
+
+    @Prop({ type: [String], ref: User.name, default: []}) // Mảng lưu trữ người tham gia
+    supporters: string[];
 }
 
 export const EventSchema = SchemaFactory.createForClass(Event);
