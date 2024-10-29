@@ -20,7 +20,7 @@ export class PetService {
   ) { }
   async onModuleInit() {
     const pets = await this.petModel.find().exec(); // Lấy tất cả pet
-    const rescueBy = await this.userModel.findOne({ email: 'volunteer@gmail.com' }).exec();
+    const rescueBy = await this.userModel.findOne({ email: 'volunteerA@gmail.com' }).exec();
 
     if (pets.length === 0) {
       const shelterLocationDefault = await this.shelterModel
