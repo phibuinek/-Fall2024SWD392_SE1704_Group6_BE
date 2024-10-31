@@ -315,7 +315,7 @@ export class PetService {
   }
   async create(createPetDto: CreatePetDto): Promise<Pet> {
     const shelter = await this.shelterModel.findOne({
-      Location: createPetDto.shelterLocation,
+      location: createPetDto.shelterLocation,
     });
     if (!shelter) {
       throw new Error("Shelter not found with the provided location");
