@@ -22,10 +22,10 @@ export class EventService {
         await this.userService.onModuleInit();
         const start = new Date();
         const end = start.setHours(start.getHours() + 7);
-        const existingEvent = await this.eventModel.find();
+        const existingEvent = await this.eventModel.find().exec();
         const supporterA = await this.userModel.findOne({ email: "volunteerA@gmail.com" })
         const supporterB = await this.userModel.findOne({ email: "volunteerB@gmail.com" })
-        if (!existingEvent.length) {
+        if (existingEvent.length === 0) {
             await this.eventModel.create([
                 {
                     title: "Event Adoption",
@@ -60,7 +60,6 @@ export class EventService {
                     participants: [],
                     supporters: [supporterA._id, supporterB._id],
                   },
-                confirm
             ]);
             console.log("Event example is create!")
 
