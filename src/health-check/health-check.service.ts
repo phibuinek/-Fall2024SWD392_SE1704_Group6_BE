@@ -19,7 +19,7 @@ export class HealthCheckService {
     const healthChecks = await this.healthCheckModel.find({ petId }).exec();
 
     if (!healthChecks.length) {
-      throw new NotFoundException(`No health checks found for pet with ID ${petId}`);
+      throw new NotFoundException(`No health checks found for pet with ID`);
     }
 
     return healthChecks;
@@ -29,7 +29,7 @@ export class HealthCheckService {
     const healthChecks = await this.healthCheckModel.find({checkingBy}).exec();
 
     if(!healthChecks.length){
-      throw new NotFoundException(`No health check create with UserId + ${checkingBy}`);
+      throw new NotFoundException(`No health check create with UserId`);
     }
     return healthChecks;
   }

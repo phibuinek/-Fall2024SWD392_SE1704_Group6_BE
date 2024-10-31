@@ -23,8 +23,8 @@ export class EventService {
         const start = new Date();
         const end = start.setHours(start.getHours() + 7);
         const existingEvent = await this.eventModel.find().exec();
-        const supporterA = await this.userModel.findOne({ email: "volunteerA@gmail.com" })
-        const supporterB = await this.userModel.findOne({ email: "volunteerB@gmail.com" })
+        const supporterA = await this.userModel.findOne({ email: "volunteerA@gmail.com" }).exec()
+        const supporterB = await this.userModel.findOne({ email: "volunteerB@gmail.com" }).exec()
         if (existingEvent.length === 0) {
             await this.eventModel.create([
                 {
