@@ -210,7 +210,7 @@ export class PetService {
         {
           shelterId: shelterLocationDefault,
           image:
-            "https://images.squarespace-cdn.com/content/v1/5c6494bbf4e5310e57b3de34/1623557067947-PN4CQHL8B84UEXR4K9CP/Capture.PNG?format=1500w",
+            "https://www.animalkingdomaz.com/wp-content/uploads/Boxer.jpg",
           name: "Rocky",
           description: "Loyal and brave, perfect guard dog.",
           color: "Brindle",
@@ -314,8 +314,6 @@ export class PetService {
         },
       ]);
       console.log("Sample pets created!");
-    } else {
-      console.log("Sample pet data already exists.");
     }
   }
   async create(createPetDto: CreatePetDto): Promise<Pet> {
