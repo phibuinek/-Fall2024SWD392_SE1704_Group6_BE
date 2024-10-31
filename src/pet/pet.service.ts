@@ -11,23 +11,28 @@ import { Shelter, ShelterDocument } from "src/shelter/schemas/shelter.schema";
 import { error } from "console";
 import { User, UserDocument } from "src/auth/schemas/user.schema";
 import { ShelterService } from "src/shelter/shelter.service";
+import { UserService } from "src/user/user.service";
 
 @Injectable()
 export class PetService {
   constructor(
     private readonly shelterService: ShelterService,
+    private readonly userService: UserService,
     @InjectModel(Pet.name) private readonly petModel: Model<PetDocument>,
     @InjectModel(Shelter.name) private readonly shelterModel: Model<ShelterDocument>,
     @InjectModel(User.name) private readonly userModel: Model<UserDocument>,
   ) { }
   async onModuleInit() {
     await this.shelterService.onModuleInit();
+    await this.userService.onModuleInit();
     const pets = await this.petModel.find().exec(); // Lấy tất cả pet
-    const rescueBy = await this.userModel.findOne({ email: 'volunteerA@gmail.com' }).exec();
+    const rescueBy = await this.userModel.findOne({email: "volunteerA@gmail.com"}).exec();
+    if (!rescueBy) {
+      throw new Error("Volunteer with email 'volunteerA@gmail.com' not found in the database.");
+    }
+    const shelterLocationDefault = await this.shelterModel.findOne({ location: "Location A" });
     if (pets.length === 0) {
-      const shelterLocationDefault = await this.shelterModel
-        .findOne({ location: "Location A" })
-        .exec();
+      
       await this.petModel.create([
         // 3 con pet volunteer tạo lúc đầu 
         {
